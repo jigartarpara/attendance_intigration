@@ -1,0 +1,62 @@
+{
+ "creation": "2020-07-09 20:44:01.250939",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "salary_should_be_below_or_equal_to",
+  "advance_salary_component",
+  "column_break_3",
+  "advance_applicable_percentage",
+  "advance_salary_eligible_after_month"
+ ],
+ "fields": [
+  {
+   "fieldname": "salary_should_be_below_or_equal_to",
+   "fieldtype": "Float",
+   "label": "Salary Should Be Below or Equal to"
+  },
+  {
+   "fieldname": "advance_salary_component",
+   "fieldtype": "Link",
+   "label": "Advance Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "advance_applicable_percentage",
+   "fieldtype": "Percent",
+   "label": "Advance applicable percentage"
+  },
+  {
+   "description": "Advance salary should not be taken by the employee in last this  number of month",
+   "fieldname": "advance_salary_eligible_after_month",
+   "fieldtype": "Int",
+   "label": "Advance Salary Eligible After Month"
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-08-20 12:05:59.466161",
+ "modified_by": "Administrator",
+ "module": "Hr Policies",
+ "name": "Advance Salary Policies",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "HR Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

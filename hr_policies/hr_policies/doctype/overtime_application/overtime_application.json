@@ -1,0 +1,135 @@
+{
+ "autoname": "OTR-.####",
+ "creation": "2020-07-18 19:28:48.020724",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "department",
+  "column_break_3",
+  "company",
+  "request_date",
+  "section_break_5",
+  "overtime_based_on_bio_metric_punch",
+  "overtime_worked",
+  "column_break_7",
+  "overtime_wages",
+  "applicable_amount",
+  "paid",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "overtime_worked",
+   "fieldtype": "Float",
+   "label": "Overtime Worked"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_wages",
+   "fieldtype": "Currency",
+   "label": "Overtime Wages (Hourly)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applicable_amount",
+   "fieldtype": "Currency",
+   "label": "Applicable Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Overtime Application",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "overtime_based_on_bio_metric_punch",
+   "fieldtype": "Float",
+   "label": "Overtime Based On Bio metric Punch",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "label": "Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2020-09-17 14:57:58.669633",
+ "modified_by": "Administrator",
+ "module": "Hr Policies",
+ "name": "Overtime Application",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

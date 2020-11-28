@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2020, Hardik gadesha and contributors
+# For license information, please see license.txt
+
+from __future__ import unicode_literals
+import frappe
+from frappe import _, throw, msgprint
+from frappe.model.document import Document
+
+class GatePass(Document):
+	def validate(self):
+		if self.type == "Personal" and self.apply_for > frappe.db.get_single_value("Gate Pass Policies", "personal_gate_pass_allowance_time"):
+			frappe.throw(_("You are not allow for gate pass more then  {0} Minutes").format(frappe.db.get_single_value("Gate Pass Policies", "personal_gate_pass_allowance_time")))
+
+		if 

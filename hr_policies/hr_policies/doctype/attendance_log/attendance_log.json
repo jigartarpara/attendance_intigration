@@ -1,0 +1,140 @@
+{
+ "autoname": "ALOG.#######",
+ "creation": "2020-08-02 00:48:02.718440",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "card_no",
+  "column_break_3",
+  "attendance_type",
+  "attendance_time",
+  "machine_id",
+  "other_details_section",
+  "shift",
+  "attendance",
+  "column_break_10",
+  "shift_start_time",
+  "shift_end_time",
+  "actual_shift_start",
+  "actual_shift_end",
+  "shift_start",
+  "shift_end"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "card_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Card No"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attendance_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Attendance Type",
+   "options": "\nIN\nOUT"
+  },
+  {
+   "fieldname": "attendance_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Attendance Time"
+  },
+  {
+   "fieldname": "machine_id",
+   "fieldtype": "Read Only",
+   "label": "Machine ID"
+  },
+  {
+   "fieldname": "other_details_section",
+   "fieldtype": "Section Break",
+   "label": "Other Details"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Link",
+   "label": "Shift",
+   "options": "Shift Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attendance",
+   "fieldtype": "Link",
+   "label": "Attendance",
+   "options": "Attendance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shift_start_time",
+   "fieldtype": "Time",
+   "label": "Shift Start Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shift_end_time",
+   "fieldtype": "Time",
+   "label": "Shift End Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_shift_start",
+   "fieldtype": "Datetime",
+   "label": "Actual Shift Start"
+  },
+  {
+   "fieldname": "actual_shift_end",
+   "fieldtype": "Datetime",
+   "label": "Actual Shift End"
+  },
+  {
+   "fieldname": "shift_start",
+   "fieldtype": "Datetime",
+   "label": "Shift Start"
+  },
+  {
+   "fieldname": "shift_end",
+   "fieldtype": "Datetime",
+   "label": "Shift End"
+  }
+ ],
+ "modified": "2020-11-08 22:53:57.916354",
+ "modified_by": "Administrator",
+ "module": "Hr Policies",
+ "name": "Attendance Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

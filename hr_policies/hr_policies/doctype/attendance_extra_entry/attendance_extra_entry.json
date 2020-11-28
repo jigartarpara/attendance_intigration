@@ -1,0 +1,82 @@
+{
+ "creation": "2020-08-08 23:11:11.317659",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "is_labour",
+  "is_employee",
+  "hours",
+  "date",
+  "type",
+  "ignore_penalty"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_labour",
+   "fieldtype": "Check",
+   "label": "Is Labour"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_employee",
+   "fieldtype": "Check",
+   "label": "Is Employee"
+  },
+  {
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "label": "Hours"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nLate Entry\nEarly Exit\nLess Hours By Labour"
+  },
+  {
+   "default": "0",
+   "fieldname": "ignore_penalty",
+   "fieldtype": "Check",
+   "label": "Ignore Penalty",
+   "permlevel": 2
+  }
+ ],
+ "modified": "2020-11-26 21:27:16.121835",
+ "modified_by": "Administrator",
+ "module": "Hr Policies",
+ "name": "Attendance Extra Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
