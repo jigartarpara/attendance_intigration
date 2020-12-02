@@ -13,9 +13,9 @@ class MissPunchApplication(Document):
 		if self.working_hours == 0 and self.office_hours == 0:
 			FMT = '%H:%M:%S'
 			dateTimeDifference = datetime.strptime(self.exit_time, FMT) - datetime.strptime(self.last_punch_time, FMT)
-			self.working_hours =  dateTimeDifference.total_seconds() / 3600
+			self.working_hours =  abs(dateTimeDifference.total_seconds() / 3600)
 			dateTimeDifference_shift = self.end_time - self.start_time
-			self.office_hours =  dateTimeDifference_shift.total_seconds() / 3600
+			self.office_hours =  abs(dateTimeDifference_shift.total_seconds() / 3600)
 
 	def on_submit(self):
 		if self.leave_application:

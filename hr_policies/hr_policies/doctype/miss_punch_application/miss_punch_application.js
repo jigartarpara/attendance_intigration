@@ -18,12 +18,10 @@ attendance_date: frm.doc.miss_punch_date
 callback:function(r){
 	var len=r.message.length;
 	    if(!r.message){
-//	        frm.set_value("punch_time","");
 	        frm.set_value("attendance","");
 	        frappe.throw("No Miss Punch Found On Selected Date, Please Select Valid Date");
 	    }
 	    else{
-//	        frm.set_value("punch_time",r.message[0][1]);
 	        frm.set_value("attendance",r.message[0][0]);
 	    }
 	}
@@ -69,12 +67,10 @@ attendance_date: frm.doc.miss_punch_date
 callback:function(r){
 	var len=r.message.length;
 	    if(!r.message){
-//	        frm.set_value("punch_time","");
 	        frm.set_value("attendance","");
 	        frappe.throw("No Miss Punch Found On Selected Date, Please Select Valid Date");
 	    }
 	    else{
-//	        frm.set_value("punch_time",r.message[0][1]);
 	        frm.set_value("attendance",r.message[0][0]);
 	    }
 	}
@@ -127,7 +123,7 @@ frappe.ui.form.on('Miss Punch Application', 'validate', function(frm) {
     var hours1 = parseInt(hoursMinutes1[0], 10);
     var minutes1 = hoursMinutes1[1] ? parseInt(hoursMinutes1[1], 10) : 0;
     var exit = hours1 + minutes1 / 60;
-    if (exit < entry) {
+    if (exit < entry && frm.doc.shift_type == "Day Shift") {
         frappe.throw("Check out time should be greater than check in time");
         validated = false;
     }
@@ -149,7 +145,7 @@ frappe.ui.form.on('Miss Punch Application', 'exit_time', function(frm) {
         var hours1 = parseInt(hoursMinutes1[0], 10);
         var minutes1 = hoursMinutes1[1] ? parseInt(hoursMinutes1[1], 10) : 0;
         var exit = hours1 + minutes1 / 60;
-        if (exit < entry) {
+        if (exit < entry && frm.doc.shift_type == "Day Shift") {
             frappe.throw("Check out time should be greater than check in time");
         }
     }
@@ -170,7 +166,7 @@ frappe.ui.form.on('Miss Punch Application', 'last_punch_time', function(frm) {
         var hours1 = parseInt(hoursMinutes1[0], 10);
         var minutes1 = hoursMinutes1[1] ? parseInt(hoursMinutes1[1], 10) : 0;
         var exit = hours1 + minutes1 / 60;
-        if (exit < entry) {
+        if (exit < entry && frm.doc.shift_type == "Day Shift") {
             frappe.throw("Check out time should be greater than check in time");
         }
     }
