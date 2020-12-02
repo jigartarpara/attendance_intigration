@@ -420,7 +420,7 @@ def changeDayShift():
 def changeNightShift():
 	data = frappe.db.sql("""select employee,shift_type
                                 from `tabShift Assignment` where docstatus = 1 and shift_time_type = "Night Shift"
-                                and date = DATE_ADD(CURDATE(),INTERVAL 1 DAY);""",as_list=True)
+                                and date = CURDATE();""",as_list=True)
 
 	if data:
 		for d in data:
