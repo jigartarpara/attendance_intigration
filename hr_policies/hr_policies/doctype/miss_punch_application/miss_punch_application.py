@@ -84,3 +84,13 @@ def getMaxpunch(employee,attendance_date):
 		return attendance
 	else:
 		return False
+
+@frappe.whitelist(allow_guest=True)
+def getMaxpunch_Night(employee,attendance_date):
+	attendance = frappe.db.sql("""SELECT max(time(attendance_time)) from `tabAttendance Log` where employee = %s
+                        and date(attendance_time) = DATE_ADD(%s,INTERVAL 1 DAY);""",(employee,attendance_date))
+
+	if attendance:
+		return attendance
+	else:
+		return False

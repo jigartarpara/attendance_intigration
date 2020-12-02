@@ -179,6 +179,7 @@ frappe.ui.form.on('Miss Punch Application', 'last_punch_time', function(frm) {
 
 frappe.ui.form.on("Miss Punch Application", {
   "punch_type": function(frm) {
+      if(frm.doc.shift_type == "Day Shift"){
         if(frm.doc.miss_punch_date && frm.doc.employee && frm.doc.application_type == "Miss Punch" && frm.doc.punch_type == "In"){
     frappe.call({
     "method": "hr_policies.hr_policies.doctype.miss_punch_application.miss_punch_application.getMaxpunch",
@@ -187,13 +188,32 @@ employee: frm.doc.employee,
 attendance_date: frm.doc.miss_punch_date
 },
 callback:function(r){
-        var len=r.message.length;
+            console.log(r.message);
             frm.set_value("exit_time",r.message[0][0]);
             frm.set_value("last_punch_time","00:00:00");
             frm.set_df_property('exit_time',  'read_only', 1);
             frm.set_df_property('last_punch_time',  'read_only', 0);
         }
-});
+    });
+}
+}
+    if(frm.doc.shift_type == "Night Shift"){
+        if(frm.doc.miss_punch_date && frm.doc.employee && frm.doc.application_type == "Miss Punch" && frm.doc.punch_type == "In"){
+    frappe.call({
+    "method": "hr_policies.hr_policies.doctype.miss_punch_application.miss_punch_application.getMaxpunch_Night",
+args: {
+employee: frm.doc.employee,
+attendance_date: frm.doc.miss_punch_date
+},
+callback:function(r){
+            console.log(r.message);
+            frm.set_value("exit_time",r.message[0][0]);
+            frm.set_value("last_punch_time","00:00:00");
+            frm.set_df_property('exit_time',  'read_only', 1);
+            frm.set_df_property('last_punch_time',  'read_only', 0);
+        }
+    });
+}
 }
 }
 });
@@ -213,7 +233,7 @@ callback:function(r){
             frm.set_df_property('last_punch_time',  'read_only', 1);
             frm.set_df_property('exit_time',  'read_only', 0);
         }
-});
+    });
 }
 }
 });
