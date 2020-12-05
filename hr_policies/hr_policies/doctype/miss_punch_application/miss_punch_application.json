@@ -178,6 +178,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "fetch_from": "default_shift.shift_type",
    "fieldname": "shift_type",
    "fieldtype": "Select",
    "label": "Shift Type",
@@ -186,7 +187,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2020-12-02 23:19:07.652478",
+ "modified": "2020-12-05 13:17:27.563916",
  "modified_by": "Administrator",
  "module": "Hr Policies",
  "name": "Miss Punch Application",
