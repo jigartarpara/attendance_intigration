@@ -441,10 +441,10 @@ def get_late_entry_details(self):
 				frappe.db.set_value("Attendance",self.name,"status","Half Day")
 				create_leave(self.employee,self.attendance_date,1)
 			elif flt(deduction_mins) >=  flt(att_settings.late_allowance_for) and flt(deduction_mins) <= flt(att_settings.max_late_allowance_for):
-				create_extra_entry(self.employee,self.attendance_date,0,1,flt(shift_total_mins*0.25)/60,'Late Entry')
+				create_extra_entry(self.employee,self.attendance_date,0,1,flt(shift_total_mins*0.25)/60,'Early Exit')
 			else:
 				if deduction_mins > 0:
-					create_extra_entry(self.employee,self.attendance_date,0,1,flt(shift_total_mins*0.25)/60,'Late Entry')		
+					create_extra_entry(self.employee,self.attendance_date,0,1,flt(shift_total_mins*0.25)/60,'Early Exit')
 
 def create_leave(employee,date,half_day):
 	if half_day == 1:
