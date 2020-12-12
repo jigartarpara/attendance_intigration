@@ -14,7 +14,11 @@
   "for_night_shift",
   "from_date_night",
   "to_date_night",
-  "process_attendance_manually_night"
+  "process_attendance_manually_night",
+  "section_break_12",
+  "lwp_attendance",
+  "select_date",
+  "process_leave"
  ],
  "fields": [
   {
@@ -71,10 +75,29 @@
    "fieldname": "for_night_shift",
    "fieldtype": "Heading",
    "label": "For Night Shift"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lwp_attendance",
+   "fieldtype": "Heading",
+   "label": "LWP Attendance"
+  },
+  {
+   "fieldname": "select_date",
+   "fieldtype": "Date",
+   "label": "Select Date"
+  },
+  {
+   "fieldname": "process_leave",
+   "fieldtype": "Button",
+   "label": "Process Leave"
   }
  ],
  "issingle": 1,
- "modified": "2020-11-26 21:00:01.458757",
+ "modified": "2020-12-11 14:21:00.882466",
  "modified_by": "Administrator",
  "module": "Hr Policies",
  "name": "Attendance Machine Settings",

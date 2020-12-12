@@ -38,3 +38,18 @@ frappe.ui.form.on('Attendance Machine Settings', {
 });
 }
 });
+
+
+frappe.ui.form.on('Attendance Machine Settings', {
+        process_leave(frm) {
+    frappe.call({
+        "method": "hr_policies.attendance_integration.create_lwp_for_noPunch",
+        args: {
+            date: frm.doc.select_date,
+        },
+        callback:function(r){
+            msgprint("LWP Generated For Date : "+frm.doc.select_date);
+    }
+});
+}
+});

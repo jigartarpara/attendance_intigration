@@ -128,7 +128,7 @@ def process_attendance(date=None):
 					except Exception as e:
 						print('exception')
 						frappe.log_error(frappe.get_traceback())
-		create_lwp_for_missing_employee(employee_list_logs,date)
+#		create_lwp_for_missing_employee(employee_list_logs,date)
 	except Exception as e:
 		frappe.log_error(frappe.get_traceback())
 
@@ -166,17 +166,53 @@ def process_attendance_night_shift(date=None):
 					except Exception as e:
 						print('exception')
 						frappe.log_error(frappe.get_traceback())
-		create_lwp_for_missing_employee(employee_list_logs,date)
+#		create_lwp_for_missing_employee_night(employee_list_logs,date)
+		print(employee_list_logs)
 	except Exception as e:
 		frappe.log_error(frappe.get_traceback())
 
-def create_lwp_for_missing_employee(employee_list_logs,date):
+def create_lwp_for_missing_employee(employee_list_logs,date = "2020-12-12"):
+	employees = get_employees()
+	for employee in employees:
+		holiday = get_holiday_list_for_employee(employee.name)
+		if not employee.name in employee_list_logs and not check_holiday(date,holiday):
+			print(employee.name)
+			print(employee_list_logs)
+#			create_leave(employee.name,date,0)
+
+def create_lwp_for_missing_employee_night(employee_list_logs,date):
 	employees = get_employees()
 	for employee in employees:
 		holiday = get_holiday_list_for_employee(employee.name)
 		if not employee.name in employee_list_logs and not check_holiday(date,holiday):
 			print(employee.name)
 			create_leave(employee.name,date,0)
+
+@frappe.whitelist()
+def create_lwp_for_noPunch(date):
+	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where attendance_date = %s and docstatus != 2""",(date),as_list=1)
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and (name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
+	for employee in employee_list:
+		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
+		if employee not in employee_list_logs and not check_holiday(date,holiday_list):
+			print(employee)
+			print(employee_list_logs)
+			print("Yes")
+			create_leave(employee[0],date,0)
+
+@frappe.whitelist()
+def auto_create_lwp_for_noPunch():
+	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where attendance_date = DATE_ADD(CURDATE(), INTERVAL 1 DAY) and docstatus != 2""",as_list=1)
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and (name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
+	for employee in employee_list:
+		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
+		if employee not in employee_list_logs and not check_holiday(datetime.today() - timedelta(days=1),holiday_list):
+			print(employee)
+			print(employee_list_logs)
+			print("Yes")
+			create_leave(employee[0],datetime.today() - timedelta(days=1),0)
+
+
 
 def check_holiday(date,holiday):
 	holiday = frappe.db.sql("""select holiday_date from `tabHoliday` where holiday_date=%s and parent=%s""",(date,holiday),as_dict=1)
