@@ -204,10 +204,11 @@ def create_lwp_for_noPunch(date):
 @frappe.whitelist()
 def auto_create_lwp_for_noPunch():
 	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where attendance_date = DATE_ADD(CURDATE(), INTERVAL 1 DAY) and docstatus != 2""",as_list=1)
+	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where %s between from_date and to_date and docstatus = 0;""",(date),as_list=1)
 	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and (name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
-		if employee not in employee_list_logs and not check_holiday(datetime.today() - timedelta(days=1),holiday_list):
+		if (employee not in employee_list_logs) and (employee not in employee_leave_logs) and not check_holiday(date,holiday_list):
 			print(employee)
 			print(employee_list_logs)
 			print("Yes")
