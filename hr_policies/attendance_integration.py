@@ -209,9 +209,6 @@ def auto_create_lwp_for_noPunch():
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
 		if (employee not in employee_list_logs) and (employee not in employee_leave_logs) and not check_holiday(datetime.today() - timedelta(days=1),holiday_list):
-			print(employee)
-			print(employee_list_logs)
-			print("Yes")
 			create_leave(employee[0],datetime.today() - timedelta(days=1),0)
 
 
