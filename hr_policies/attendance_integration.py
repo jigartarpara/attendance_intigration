@@ -190,9 +190,12 @@ def create_lwp_for_missing_employee_night(employee_list_logs,date):
 
 @frappe.whitelist()
 def create_lwp_for_noPunch(date):
-	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where attendance_date = %s and docstatus != 2""",(date),as_list=1)
-	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where %s between from_date and to_date and docstatus = 0;""",(date),as_list=1)
-	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and (name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
+	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where 
+		attendance_date = %s and docstatus != 2""",(date),as_list=1)
+	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where %s between 
+		from_date and to_date and docstatus = 0;""",(date),as_list=1)
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and 
+		(name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
 		if (employee not in employee_list_logs) and (employee not in employee_leave_logs) and not check_holiday(date,holiday_list):
@@ -203,13 +206,18 @@ def create_lwp_for_noPunch(date):
 
 @frappe.whitelist()
 def auto_create_lwp_for_noPunch():
-	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where attendance_date = DATE_SUB(CURDATE(), INTERVAL 1 DAY) and docstatus != 2""",as_list=1)
-	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where DATE_SUB(CURDATE(), INTERVAL 1 DAY) between from_date and to_date and docstatus = 0;""",as_list=1)
-	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and (name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
+	yesterday = datetime.now().date() - timedelta(days=1)
+	employee_list_logs = frappe.db.sql("""select employee from `tabAttendance` where
+		attendance_date = DATE_SUB(CURDATE(), INTERVAL 1 DAY) and docstatus != 2;""",as_list=1)
+	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where 
+		DATE_SUB(CURDATE(), INTERVAL 1 DAY) between from_date and to_date and docstatus = 0;""",as_list=1)
+	employee_logs = employee_list_logs + employee_leave_logs
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and 
+		(name not like '%MPP%' or name not like '%MDPL%');""", as_list=1)
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
-		if (employee not in employee_list_logs) and (employee not in employee_leave_logs) and not check_holiday(datetime.today() - timedelta(days=1),holiday_list):
-			create_leave(employee[0],datetime.today() - timedelta(days=1),0)
+		if employee not in employee_logs and not check_holiday(yesterday,holiday_list):
+			create_leave(employee[0],yesterday,0)
 
 
 

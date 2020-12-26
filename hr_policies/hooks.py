@@ -202,11 +202,10 @@ scheduler_events = {
 		"0 13 * * *":[
                         "hr_policies.custom_validate.changeNightShift"
                 ],
-		"0 19 * * *":[
+		"30 18 * * *":[
                         "hr_policies.attendance_integration.auto_create_lwp_for_noPunch"
                 ]
 	}
-
 }
 
 # Testing
