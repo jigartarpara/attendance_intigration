@@ -427,3 +427,22 @@ def changeNightShift():
 			doc = frappe.get_doc("Employee", d[0])
 			doc.default_shift = d[1]
 			doc.save(ignore_permissions=True)
+
+@frappe.whitelist()
+def add_1_CL():
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and 
+	(name not like '%MPP%' or name not like '%MDPL%') and leave_policy is not null limit 5;""", as_list=1)
+	last_day = frappe.db.sql("""select curdate(),last_day(curdate());""")
+	if employee_list:
+		for employee in employee_list:
+			doc = frappe.get_doc(dict(
+			doctype = "Leave Allocation",
+			employee = employee[0],
+			leave_type = frappe.db.get_single_value('Attendance Policies', 'leave_type'),
+			new_leaves_allocated = 1,
+			carry_forward = 1,
+			from_date = last_day[0][0],
+			to_date = last_day[0][1]
+			)).insert(ignore_permissions = True)
+			doc.save(ignore_permissions = True)
+			doc.submit()
