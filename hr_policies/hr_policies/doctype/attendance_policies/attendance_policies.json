@@ -6,7 +6,9 @@
  "field_order": [
   "late_allowance_for",
   "max_late_allowance_for",
-  "holiday_wages_component"
+  "holiday_wages_component",
+  "section_break_4",
+  "leave_type"
  ],
  "fields": [
   {
@@ -24,10 +26,21 @@
    "fieldtype": "Link",
    "label": "Holiday Wages Component",
    "options": "Salary Component"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Add leave type which will auto increment by 1 each month.",
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type"
   }
  ],
  "issingle": 1,
- "modified": "2020-09-04 21:27:54.702985",
+ "modified": "2020-12-29 00:47:23.655373",
  "modified_by": "Administrator",
  "module": "Hr Policies",
  "name": "Attendance Policies",
