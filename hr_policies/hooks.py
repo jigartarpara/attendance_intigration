@@ -193,8 +193,14 @@ scheduler_events = {
 		"00 09 * * *":[
 			"hr_policies.attendance_integration.process_attendance"
 		],
+		"30 09 * * *":[
+                        "hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Day"
+                ],
 		"00 18 * * *":[
                         "hr_policies.attendance_integration.process_attendance_night_shift"
+                ],
+		"30 18 * * *":[
+                        "hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Night"
                 ],
 		"30 23 * * Sun":[
 			"hr_policies.process_attendance.process_sandwich_leave_weekly"
@@ -204,9 +210,6 @@ scheduler_events = {
                 ],
 		"00 13 * * *":[
                         "hr_policies.custom_validate.changeNightShift"
-                ],
-		"30 18 * * *":[
-                        "hr_policies.attendance_integration.auto_create_lwp_for_noPunch"
                 ]
 	}
 }
