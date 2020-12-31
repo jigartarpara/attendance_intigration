@@ -625,8 +625,7 @@ def auto_create_lwp_for_noPunch_Day():
 	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where 
 		DATE_SUB(CURDATE(), INTERVAL 1 DAY) between from_date and to_date and docstatus = 0;""",as_list=1)
 	employee_logs = employee_list_logs + employee_leave_logs
-	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and
-                (name not like '%MPP%' or name not like '%MDPL%') and
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and name like '%PNI%' and
                 default_shift in (select name from `tabShift Type` where shift_type = "Day Shift");""", as_list=1)
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
@@ -641,8 +640,7 @@ def auto_create_lwp_for_noPunch_Night():
 	employee_leave_logs = frappe.db.sql("""select employee from `tabLeave Application` where 
 		DATE_SUB(CURDATE(), INTERVAL 1 DAY) between from_date and to_date and docstatus = 0;""",as_list=1)
 	employee_logs = employee_list_logs + employee_leave_logs
-	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and
-                (name not like '%MPP%' or name not like '%MDPL%') and
+	employee_list = frappe.db.sql("""select name from `tabEmployee` where status = "Active" and name like '%PNI%' and
                 default_shift in (select name from `tabShift Type` where shift_type = "Night Shift");""", as_list=1)
 	for employee in employee_list:
 		holiday_list = frappe.db.get_value("Employee", employee[0], ["holiday_list"])
