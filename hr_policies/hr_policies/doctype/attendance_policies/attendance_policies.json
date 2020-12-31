@@ -8,7 +8,17 @@
   "max_late_allowance_for",
   "holiday_wages_component",
   "section_break_4",
-  "leave_type"
+  "leave_type",
+  "section_break_6",
+  "late_entry_penalty",
+  "from_late_entry_date",
+  "to_late_entry_date",
+  "run_late_entry_penalty",
+  "column_break_10",
+  "holiday_earning",
+  "from_holiday_date",
+  "to_holiday_date",
+  "run_holiday_earning"
  ],
  "fields": [
   {
@@ -37,10 +47,59 @@
    "fieldtype": "Link",
    "label": "Leave Type",
    "options": "Leave Type"
+  },
+  {
+   "description": "Please Select Time Period For 1 Month To Avoid Timeout Errors.",
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "late_entry_penalty",
+   "fieldtype": "Heading",
+   "label": "Late Entry Penalty"
+  },
+  {
+   "fieldname": "from_late_entry_date",
+   "fieldtype": "Date",
+   "label": "From Late Entry Date"
+  },
+  {
+   "fieldname": "to_late_entry_date",
+   "fieldtype": "Date",
+   "label": "To Late Entry Date"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "holiday_earning",
+   "fieldtype": "Heading",
+   "label": "Holiday Earning"
+  },
+  {
+   "fieldname": "from_holiday_date",
+   "fieldtype": "Date",
+   "label": "From Holiday Date"
+  },
+  {
+   "fieldname": "to_holiday_date",
+   "fieldtype": "Date",
+   "label": "To Holiday Date"
+  },
+  {
+   "fieldname": "run_late_entry_penalty",
+   "fieldtype": "Button",
+   "label": "Run Late Entry Penalty"
+  },
+  {
+   "fieldname": "run_holiday_earning",
+   "fieldtype": "Button",
+   "label": "Run Holiday Earning"
   }
  ],
  "issingle": 1,
- "modified": "2020-12-29 00:47:23.655373",
+ "modified": "2021-01-01 01:11:47.179966",
  "modified_by": "Administrator",
  "module": "Hr Policies",
  "name": "Attendance Policies",

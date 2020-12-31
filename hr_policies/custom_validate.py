@@ -446,3 +446,93 @@ def add_1_CL():
 			)).insert(ignore_permissions = True)
 			doc.save(ignore_permissions = True)
 			doc.submit()
+
+
+#################################################### Manual Function For Holiday Earning #############################################
+
+@frappe.whitelist()
+def add_holiday_earning_manual(from_date,to_date):
+	data = frappe.db.sql("""select ha.employee,sum(ha.total_working_hours)
+				from `tabHoliday Attendance` ha, `tabEmployee` emp where ha.total_working_hours != 0 and ha.added = 0 and
+				ha.date between %s and %s
+				and ha.employee = emp.name and emp.status = "Active"
+				group by ha.employee;""",(from_date,to_date),as_list=True)
+
+	name = frappe.db.sql("""SELECT ha.name FROM `tabHoliday Attendance` ha, `tabEmployee` emp WHERE ha.total_working_hours != 0 and 
+				ha.date between %s and %s and ha.added = 0 and
+				ha.employee = emp.name and emp.status = "Active";""",(from_date,to_date),as_list=True)
+
+
+	if data:
+		for d in data:
+			salary_slip = preview_salary_slip_for_late_entry(d[0])
+			day_rate = salary_slip.gross_pay / salary_slip.total_working_days
+
+			hours = frappe.db.sql("""select office_hours from `tabAttendance` where status = "Present" and 
+			docstatus = 1 and employee = %s and office_hours != 0 order by name desc limit 1;""",(d[0]))
+
+			per_hr = day_rate / abs(hours[0][0])
+
+			ads = frappe.get_doc({
+			"doctype": "Additional Salary",
+			"employee": d[0],
+			"payroll_date": to_date,
+			"company": frappe.db.get_single_value('Global Defaults', 'default_company'),
+			"salary_component": frappe.db.get_single_value('Attendance Policies', 'holiday_wages_component'),
+			"amount": int(per_hr * d[1]),
+			"overwrite_salary_structure_amount": 1
+			})
+			ads.insert(ignore_permissions=True,ignore_mandatory = True)
+			ads.save(ignore_permissions=True)
+			ads.submit()
+
+
+	if name:
+		for i in name:
+			ot = frappe.get_doc("Holiday Attendance", i[0])
+			ot.added = 1
+			ot.save(ignore_permissions=True)
+
+
+@frappe.whitelist()
+def add_penalty(from_date,to_date):
+	data = frappe.db.sql("""select ha.employee,sum(ha.hours) from `tabAttendance Extra Entry` ha, `tabEmployee` emp 
+				where ha.hours != 0 and ha.calculated = 0 and ha.ignore_penalty = 0 
+				and ha.date between %s and %s and ha.employee = emp.name and emp.status = "Active"
+				group by ha.employee;""",(from_date,to_date),as_list=True)
+
+	name = frappe.db.sql("""SELECT ha.name FROM `tabAttendance Extra Entry` ha, `tabEmployee` emp 
+				WHERE ha.hours != 0 and ha.calculated = 0 and ha.ignore_penalty = 0 
+				and ha.date between %s and %s and ha.employee = emp.name 
+				and emp.status = "Active";""",(from_date,to_date),as_list=True)
+
+
+	if data:
+		for d in data:
+			salary_slip = preview_salary_slip_for_late_entry(d[0])
+			day_rate = salary_slip.gross_pay / salary_slip.total_working_days
+
+			hours = frappe.db.sql("""select office_hours from `tabAttendance` where status = "Present" and 
+			docstatus = 1 and employee = %s and office_hours != 0 order by name desc limit 1;""",(d[0]))
+
+			per_hr = day_rate / abs(hours[0][0])
+
+			ads = frappe.get_doc({
+			"doctype": "Additional Salary",
+			"employee": d[0],
+			"payroll_date": to_date,
+			"company": frappe.db.get_single_value('Global Defaults', 'default_company'),
+			"salary_component": frappe.db.get_single_value('Late Entry Policies', 'late_entry_deduction_component'),
+			"amount": int(per_hr * d[1]),
+			"overwrite_salary_structure_amount": 1
+			})
+			ads.insert(ignore_permissions=True,ignore_mandatory = True)
+			ads.save(ignore_permissions=True)
+			ads.submit()
+
+
+	if name:
+		for i in name:
+			ot = frappe.get_doc("Attendance Extra Entry", i[0])
+			ot.calculated = 1
+			ot.save(ignore_permissions=True)
