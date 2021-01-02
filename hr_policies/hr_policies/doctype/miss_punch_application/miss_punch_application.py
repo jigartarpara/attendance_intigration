@@ -18,15 +18,16 @@ class MissPunchApplication(Document):
 			self.office_hours =  abs(dateTimeDifference_shift.total_seconds() / 3600)
 
 	def on_submit(self):
-		if self.leave_application:
-			doc = frappe.get_doc("Leave Application", self.leave_application)
-			doc.delete()
+		if self.application_type != "Holiday":
+			if self.leave_application:
+				doc = frappe.get_doc("Leave Application", self.leave_application)
+				doc.delete()
 
-		if self.attendance:
-			doc = frappe.get_doc("Attendance", self.attendance)
-			doc.delete()
+			if self.attendance:
+				doc = frappe.get_doc("Attendance", self.attendance)
+				doc.delete()
 
-		doc = frappe.get_doc(dict(
+			doc = frappe.get_doc(dict(
 			doctype = "Attendance",
 			attendance_date = self.miss_punch_date,
 			status = "Present",
@@ -37,8 +38,18 @@ class MissPunchApplication(Document):
 			working_hours = self.working_hours,
 			office_hours = self.office_hours,
 			overtime = flt(self.working_hours)-flt(self.office_hours) if flt(self.working_hours) > flt(self.office_hours) else 0,
-		)).insert(ignore_permissions = True)
-		doc.submit()
+			)).insert(ignore_permissions = True)
+			doc.submit()
+
+		if self.application_type == "Holiday":
+			doc = frappe.get_doc(dict(
+			doctype = "Holiday Attendance",
+			employee = self.employee,
+			punch_in = self.last_punch_time,
+			punch_out = self.exit_time,
+			total_working_hours = self.working_hours
+			)).insert(ignore_permissions = True)
+			doc.submit()
 
 @frappe.whitelist(allow_guest=True)
 def getattendance(employee,attendance_date):
