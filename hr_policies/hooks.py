@@ -182,28 +182,28 @@ fixtures = [
 scheduler_events = {
 	"cron": {
 		"30 00 1 1-9 *":[
-                        "hr_policies.custom_validate.add_1_CL"
+                        #"hr_policies.custom_validate.add_1_CL"
                 ],
 		"30 23 1 * *": [
-			"hr_policies.hr_policies.doctype.gate_pass.gate_pass.insertGP",
-			"hr_policies.hr_policies.doctype.gate_pass.gate_pass.insertOT"
+			#"hr_policies.hr_policies.doctype.gate_pass.gate_pass.insertGP",
+			#"hr_policies.hr_policies.doctype.gate_pass.gate_pass.insertOT"
 #			"hr_policies.attendance_integration.add_late_entry_deduction",
 #			"hr_policies.custom_validate.add_holiday_earning",
 		],
 		"00 09 * * *":[
-			"hr_policies.attendance_integration.process_attendance"
+			#"hr_policies.attendance_integration.process_attendance"
 		],
 		"30 09 * * *":[
-                        "hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Day"
+                        #"hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Day"
                 ],
 		"00 18 * * *":[
-                        "hr_policies.attendance_integration.process_attendance_night_shift"
+                        #"hr_policies.attendance_integration.process_attendance_night_shift"
                 ],
 		"30 18 * * *":[
-                        "hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Night"
+                        #"hr_policies.attendance_integration.auto_create_lwp_for_noPunch_Night"
                 ],
 		"30 23 * * Sun":[
-			"hr_policies.process_attendance.process_sandwich_leave_weekly"
+			#"hr_policies.process_attendance.process_sandwich_leave_weekly"
 		],
 		"00 22 * * *":[
                         "hr_policies.custom_validate.changeDayShift"

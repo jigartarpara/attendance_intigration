@@ -47,6 +47,8 @@ frappe.ui.form.on('Attendance Machine Settings', {
         args: {
             date: frm.doc.select_date,
         },
+	freeze: true,
+	freeze_message: __("Processing ! Please Wait"),
         callback:function(r){
             msgprint("LWP Generated For Date : "+frm.doc.select_date);
     }
