@@ -3,7 +3,7 @@ import frappe
 from frappe import _
 from frappe.utils import formatdate, format_datetime, getdate, get_datetime,get_first_day,get_last_day, nowdate, flt, cint, cstr, add_days, today,month_diff,date_diff,add_months
 from datetime import datetime,timedelta
-from erpnext.hr.doctype.salary_structure.salary_structure import make_salary_slip
+from erpnext.payroll.doctype.salary_structure.salary_structure import make_salary_slip
 from frappe.model.mapper import get_mapped_doc
 from erpnext.hr.doctype.employee.employee import get_holiday_list_for_employee
 from frappe.utils import nowdate
