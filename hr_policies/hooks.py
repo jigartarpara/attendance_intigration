@@ -28,9 +28,6 @@ app_license = "MIT"
 # include js in doctype views
 
 doctype_js = {
-    "Employee Advance": "public/js/employee_advance.js",
-    "Employee": "public/js/employee.js",
-    "Loan Application": "public/js/loan_application.js"
 }
 
 
@@ -87,20 +84,6 @@ doctype_js = {
 # Hook on document methods and events
 
 doc_events = {
-    "Loan Application": {
-        "validate": "hr_policies.custom_validate.validate_guarantor"
-    },
-    "Employee": {
-        "on_change": "hr_policies.hr_policies.doctype.referral_bonus_application.referral_bonus_application.updateADS",
-        "validate": "hr_policies.custom_validate.check_guarantor_in_loan"
-    },
-    "Attendance Log": {
-        "before_insert": "hr_policies.attendance_integration.update_attendance_log"
-    },
-    "Attendance": {
-        "on_submit": "hr_policies.attendance_integration.add_late_entry",
-        "before_submit": "hr_policies.process_attendance.process_sandwich_leave"
-    }
 }
 
 fixtures = [
