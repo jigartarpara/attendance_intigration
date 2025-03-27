@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "GLOAN.####",
  "creation": "2020-07-11 19:17:49.069952",
  "doctype": "DocType",
@@ -15,8 +16,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Employee",
-   "options": "Employee",
-   "reqd": 1
+   "options": "Employee"
   },
   {
    "default": "Active",
@@ -35,8 +35,10 @@
    "label": "Employee Name"
   }
  ],
+ "index_web_pages_for_search": 1,
  "istable": 1,
- "modified": "2020-08-20 12:05:39.207148",
+ "links": [],
+ "modified": "2022-02-15 11:47:38.285378",
  "modified_by": "Administrator",
  "module": "Hr Policies",
  "name": "Loan Guarantor",
